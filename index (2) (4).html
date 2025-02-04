@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emon</title>
+</head>
+<body>
+    <h1 style="text-align:center; margin-top:20%;">Pati Hero</h1>
+
+    <!-- বাটন সেকশন -->
+    <div style="text-align:center; margin-top:20px;">
+        <button onclick="alert('Hello, Pati Hero!')">Click Me</button>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <script>
+        function login() {
+            let username = prompt("Enter your username:");
+            let password = prompt("Enter your password:");
+
+            if (username && password) {
+                alert("Login Successful!");
+            } else {
+                alert("Login Failed! Please enter valid details.");
+            }
+        }
+    </script>
+</body>
+</html>
