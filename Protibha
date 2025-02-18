@@ -2,85 +2,95 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Sharing Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            font-size: 24px;
-        }
-        main {
-            padding: 20px;
-        }
-        video, iframe {
-            border-radius: 10px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            margin: 20px 0;
-        }
-        button {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            font-size: 16px;
-            margin: 5px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, Initial-scale=1.0">
+    
+<title>Test</title>
+<h1 style="Text-align: center; margin-top:10px;">Emon 😂</h1>
 
+<div class="youtube-container">
+            <a href="https://www.youtube.com" target="_blank" class="youtube-button">    
+                🎦 Go to YouTube
+            </a>
+        </div> 
+
+<div class="YouTube-container">
+    <a href="https://www.youtube.com" target="black" class="YouTube-button">
+  🎦 YouTube      
+    </a>
+    </div>
+
+<div class="Facebook-container">
+    <a href="https://www.facbook.com" target="blank" class="Facebook-button">
+        👨‍👩‍👧‍👦 Facebook
+    </a>
+    </div>
+    
+<div class="tiktok-container">
+    <a href="https://www.tiktok.com" class="tiktok-button">
+        🥵 tiktok
+    </a>
+    </div>
+      
+<div class="imo-container">
+    <a href="https://www.imo.com" target="blank" class="imo-button">
+       👉 imo
+    </a>
     <header>
-        <h1>Welcome to My Video Site</h1>
-    </header>
+    <input type="text" id="searchInput" placeholder="Search videos..." onkeyup="searchVideos()">
+    <button id="searchBtn" onclick="searchVideos()">🔍</button>
+</header>
 
-    <main>
-        <h2>Featured Video</h2>
-        <video id="myVideo" width="600" controls>
-            <source src="video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <br>
-        <button onclick="playVideo()">Play</button>
-        <button onclick="pauseVideo()">Pause</button>
-
-        <h2>My YouTube Video</h2>
-        <iframe width="600" height="315" src="https://www.youtube.com/embed/LYEjq6K9by8" frameborder="0" allowfullscreen></iframe>
-    </main>
-
-    <footer>
-        <p>© 2025 My Video Site. All rights reserved.</p>
-    </footer>
-
-    <script>
-        function playVideo() {
-            document.getElementById("myVideo").play();
-        }
-        function pauseVideo() {
-            document.getElementById("myVideo").pause();
-        }
-    </script>
-
-</body>
-</html>
+<style>
+    .tiktok-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0050;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+    }
+    .imo-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0050;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+    }
+     .Facebook-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0050;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+    }
+     .YouTube-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0050;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+    }
+    function searchVideos() {
+    let query = document.getElementById("searchInput").value.toLowerCase();
+    if (query) {
+        alert("Searching for: " + query);
+        // এখানে তুমি Firebase বা অন্য API দিয়ে রেজাল্ট আনতে পারো
+    } else {
+        alert("Please enter a search term!");
+    }
+}
