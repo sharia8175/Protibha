@@ -2,29 +2,95 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emon</title>
-</head>
-<body>
-    <h1 style="text-align:center; margin-top:20%;">Pati Hero</h1>
+    <meta name="viewport" content="width=device-width, Initial-scale=1.0">
+    
+<title>Test</title>
+<h1 style="Text-align: center; margin-top:10px;">Emon 😂</h1>
 
-    <!-- বাটন সেকশন -->
-    <div style="text-align:center; margin-top:20px;">
-        <button onclick="alert('Hello, Pati Hero!')">Click Me</button>
-        <button onclick="login()">Login</button>
+<div class="youtube-container">
+            <a href="https://www.youtube.com" target="_blank" class="youtube-button">    
+                🎦 Go to YouTube
+            </a>
+        </div> 
+
+<div class="YouTube-container">
+    <a href="https://www.youtube.com" target="black" class="YouTube-button">
+  🎦 YouTube      
+    </a>
     </div>
 
-    <script>
-        function login() {
-            let username = prompt("Enter your username:");
-            let password = prompt("Enter your password:");
+<div class="Facebook-container">
+    <a href="https://www.facbook.com" target="blank" class="Facebook-button">
+        👨‍👩‍👧‍👦 Facebook
+    </a>
+    </div>
+    
+<div class="tiktok-container">
+    <a href="https://www.tiktok.com" class="tiktok-button">
+        🥵 tiktok
+    </a>
+    </div>
+      
+<div class="imo-container">
+    <a href="https://www.imo.com" target="blank" class="imo-button">
+       👉 imo
+    </a>
+    <header>
+    <input type="text" id="searchInput" placeholder="Search videos..." onkeyup="searchVideos()">
+    <button id="searchBtn" onclick="searchVideos()">🔍</button>
+</header>
 
-            if (username && password) {
-                alert("Login Successful!");
-            } else {
-                alert("Login Failed! Please enter valid details.");
-            }
-        }
-    </script>
-</body>
-</html>
+<style>
+    .tiktok-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0050;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+    }
+    .imo-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0050;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+    }
+     .Facebook-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0050;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+    }
+     .YouTube-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff0050;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+    }
+    function searchVideos() {
+    let query = document.getElementById("searchInput").value.toLowerCase();
+    if (query) {
+        alert("Searching for: " + query);
+        // এখানে তুমি Firebase বা অন্য API দিয়ে রেজাল্ট আনতে পারো
+    } else {
+        alert("Please enter a search term!");
+    }
+}
