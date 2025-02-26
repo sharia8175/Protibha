@@ -2,95 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, Initial-scale=1.0">
-    
-<title>Test</title>
-<h1 style="Text-align: center; margin-top:10px;">Emon 😂</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Sites Viewer</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        input {
+            padding: 5px;
+            margin: 10px;
+        }
+        button {
+            padding: 5px;
+            cursor: pointer;
+        }
+        .site-container {
+            margin: 10px;
+            padding: 10px;
+        }
+        a {
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            width: 200px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
 
-<div class="youtube-container">
-            <a href="https://www.youtube.com" target="_blank" class="youtube-button">    
-                🎦 Go to YouTube
-            </a>
-        </div> 
+<h1>All Sites Viewer</h1>
 
-<div class="YouTube-container">
-    <a href="https://www.youtube.com" target="black" class="YouTube-button">
-  🎦 YouTube      
-    </a>
-    </div>
+<input type="text" id="search-input" placeholder="Search site..." onkeyup="searchVideo()">
+<button onclick="searchVideo()">🔍</button>
 
-<div class="Facebook-container">
-    <a href="https://www.facbook.com" target="blank" class="Facebook-button">
-        👨‍👩‍👧‍👦 Facebook
-    </a>
-    </div>
-    
-<div class="tiktok-container">
-    <a href="https://www.tiktok.com" class="tiktok-button">
-        🥵 tiktok
-    </a>
-    </div>
-      
-<div class="imo-container">
-    <a href="https://www.imo.com" target="blank" class="imo-button">
-       👉 imo
-    </a>
-    <header>
-    <input type="text" id="searchInput" placeholder="Search videos..." onkeyup="searchVideos()">
-    <button id="searchBtn" onclick="searchVideos()">🔍</button>
-</header>
+<div class="site-container" id="youtube">
+    <a href="https://www.youtube.com" target="_blank">YouTube</a>
+</div>
 
-<style>
-    .tiktok-button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #ff0050;
-        color: white;
-        text-decoration: none;
-        font-size: 18px;
-        border-radius: 5px;
-        text-align: center;
-        font-weight: bold;
-    }
-    .imo-button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #ff0050;
-        color: white;
-        text-decoration: none;
-        font-size: 18px;
-        border-radius: 5px;
-        text-align: center;
-        font-weight: bold;
-    }
-     .Facebook-button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #ff0050;
-        color: white;
-        text-decoration: none;
-        font-size: 18px;
-        border-radius: 5px;
-        text-align: center;
-        font-weight: bold;
-    }
-     .YouTube-button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #ff0050;
-        color: white;
-        text-decoration: none;
-        font-size: 18px;
-        border-radius: 5px;
-        text-align: center;
-        font-weight: bold;
-    }
-    function searchVideos() {
-    let query = document.getElementById("searchInput").value.toLowerCase();
-    if (query) {
-        alert("Searching for: " + query);
-        // এখানে তুমি Firebase বা অন্য API দিয়ে রেজাল্ট আনতে পারো
-    } else {
-        alert("Please enter a search term!");
-    }
+<div class="site-container" id="facebook">
+    <a href="https://www.facebook.com" target="_blank">Facebook</a>
+</div>
+
+<div class="site-container" id="tiktok">
+    <a href="https://www.tiktok.com" target="_blank">TikTok</a>
+</div>
+
+<script>
+function searchVideo() {
+    let input = document.getElementById("search-input").value.toLowerCase();
+    let sites = document.querySelectorAll(".site-container");
+
+    sites.forEach(site => {
+        if (site.innerText.toLowerCase().includes(input)) {
+            site.style.display = "block";
+        } else {
+            site.style.display = "none";
+        }
+    });
 }
+</script>
+
+</body>
+</html>
