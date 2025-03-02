@@ -64,6 +64,18 @@
     <a href="https://www.pinterest.com" target="_blank">Pinterest</a>
 </div>
 
+<div class="site-container" id="Google">
+    <a href="https://www.google.com" target="_blank">Google</a>
+</div>
+
+<div class="site-container" id="BBC">
+    <a href="https://www.bbc.com" target="_blank">BBC</a>
+</div>
+
+<div class="site-container" id="Amazon">
+    <a href="https://www.amazon.com" target="_blank">Amazon</a>
+</div>
+
 <script>
 function searchVideo() {
     let input = document.getElementById("search-input").value.toLowerCase();
