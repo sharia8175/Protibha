@@ -5,91 +5,220 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Sites Viewer</title>
     <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        input {
-            padding: 5px;
-            margin: 10px;
-        }
-        button {
-            padding: 5px;
-            cursor: pointer;
-        }
-        .site-container {
-            margin: 10px;
-            padding: 10px;
-        }
-        a {
-            text-decoration: none;
-            display: block;
-            padding: 10px;
-            background: #007bff;
-            color: white;
-            border-radius: 5px;
-            width: 200px;
-            margin: auto;
-        }
+        /* General Styles */
+body {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* Title */
+h1 {
+    color: #333;
+    margin-top: 20px;
+    font-size: 2rem;
+}
+
+/* Search Bar */
+.search-container {
+    margin: 15px auto;
+    max-width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-input {
+    padding: 10px;
+    width: 70%;
+    border: 2px solid #007bff;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+}
+
+button {
+    padding: 10px 15px;
+    margin-left: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Site Links */
+.site-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive */
+    gap: 10px;
+    justify-content: center;
+    margin: 10px auto;
+    max-width: 95%;
+    padding: 10px;
+}
+
+/* Individual Site Box */
+.site-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.site-card img {
+    width: 40px; /* Smaller icons */
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.site-card a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1rem;
+    font-weight: bold;
+    display: block;
+}
+
+.site-card a:hover {
+    color: #0056b3;
+}
+
+/* Hidden Class */
+.hidden {
+    display: none;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 600px) {
+    .site-container {
+        grid-template-columns: repeat(2, 1fr); /* মোবাইলে ২টি করে দেখাবে */
+        gap: 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    #search-input {
+        width: 65%;
+    }
+
+    .site-card {
+        padding: 10px;
+    }
+}
     </style>
 </head>
 <body>
 
 <h1>All Sites Viewer</h1>
 
-<input type="text" id="search-input" placeholder="Search site..." onkeyup="searchVideo()">
-<button onclick="searchVideo()">🔍</button>
-
-<div class="site-container" id="youtube">
-    <a href="https://www.youtube.com" target="_blank">YouTube</a>
+<div class="search-container">
+    <input type="text" id="search-input" placeholder="Search site..." onkeyup="searchSite()">
+    <button onclick="searchSite()">🔍 Search</button>
 </div>
 
-<div class="site-container" id="facebook">
-    <a href="https://www.facebook.com" target="_blank">Facebook</a>
-</div>
+<div class="site-container">
+    <div class="site-card">
+        <a href="https://www.youtube.com" target="_blank">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=youtube.com" alt="YouTube">
+            <p>YouTube</p>
+        </a>
+    </div>
 
-<div class="site-container" id="tiktok">
-    <a href="https://www.tiktok.com" target="_blank">TikTok</a>
-</div>
+    <div class="site-card">
+        <a href="https://www.facebook.com" target="_blank">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=facebook.com" alt="Facebook">
+            <p>Facebook</p>
+        </a>
+    </div>
 
-<div class="site-container" id="Linkedin">
-    <a href="https://www.linkedin.com" target="_blank">Linkedin</a>
-</div>
+    <div class="site-card">
+        <a href="https://www.tiktok.com" target="_blank">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=tiktok.com" alt="TikTok">
+            <p>TikTok</p>
+        </a>
+    </div>
 
-<div class="site-container" id="GitHub">
-    <a href="https://www.github.com" target="_blank">GitHub</a>
-</div>
+    <div class="site-card">
+        <a href="https://www.linkedin.com" target="_blank">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=linkedin.com" alt="LinkedIn">
+            <p>LinkedIn</p>
+        </a>
+    </div>
 
-<div class="site-container" id="Pinterest">
-    <a href="https://www.pinterest.com" target="_blank">Pinterest</a>
-</div>
+    <div class="site-card">
+        <a href="https://www.github.com" target="_blank">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=github.com" alt="GitHub">
+            <p>GitHub</p>
+        </a>
+    </div>
 
-<div class="site-container" id="Google">
-    <a href="https://www.google.com" target="_blank">Google</a>
-</div>
+    <div class="site-card">
+        <a href="https://www.pinterest.com" target="_blank">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=pinterest.com" alt="Pinterest">
+            <p>Pinterest</p>
+        </a>
+    </div>
 
-<div class="site-container" id="BBC">
-    <a href="https://www.bbc.com" target="_blank">BBC</a>
-</div>
+    <div class="site-card">
+        <a href="https://www.google.com" target="_blank">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=google.com" alt="Google">
+            <p>Google</p>
+        </a>
+    </div>
 
-<div class="site-container" id="Amazon">
-    <a href="https://www.amazon.com" target="_blank">Amazon</a>
-</div>
+    <div class="site-card">
+        <a href="https://www.bbc.com" target="_blank">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=bbc.com" alt="BBC">
+            <p>BBC</p>
+        </a>
+    </div>
 
+    <div class="site-card">
+        <a href="https://www.amazon.com" target="_blank">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=amazon.com" alt="Amazon">
+            <p>Amazon</p>
+        </a>
+    </div>
+
+    <div class="site-card">
+        <a href="https://fifa.com" target="_blank">
+            <img src="https://www.google.com/s2/favicons?sz=64&domain=fifa.com" alt="FIFA">
+            <p>FIFA</p>
+        </a>
+    </div>
+</div>
 <script>
-function searchVideo() {
+function searchSite() {
     let input = document.getElementById("search-input").value.toLowerCase();
-    let sites = document.querySelectorAll(".site-container");
+    let sites = document.querySelectorAll(".site-card");
 
     sites.forEach(site => {
-        if (site.innerText.toLowerCase().includes(input)) {
-            site.style.display = "block";
+        let siteName = site.querySelector("a").innerText.toLowerCase();
+        if (siteName.includes(input)) {
+            site.classList.remove("hidden");
         } else {
-            site.style.display = "none";
+            site.classList.add("hidden");
         }
     });
 }
 </script>
-
 </body>
 </html>
