@@ -1,224 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Sites Viewer</title>
-    <style>
-        /* General Styles */
-body {
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-}
+package com.mycompany.cargame2;
 
-/* Title */
-h1 {
-    color: #333;
-    margin-top: 20px;
-    font-size: 2rem;
-}
 
-/* Search Bar */
-.search-container {
-    margin: 15px auto;
-    max-width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-#search-input {
-    padding: 10px;
-    width: 70%;
-    border: 2px solid #007bff;
-    border-radius: 25px;
-    font-size: 1rem;
-    outline: none;
-}
+public class MyGdxGame extends ApplicationAdapter {
+    private ShapeRenderer shapeRenderer;
+    private SpriteBatch batch;
+    private BitmapFont font;
+    private float characterX, characterY, characterSize, jumpVelocity, gravity, groundLevel;
+    private float obstacleX, obstacleWidth, obstacleHeight, autoMoveSpeed;
+    private boolean isJumping, gameOver, gameStarted;
+    private int score;
 
-button {
-    padding: 10px 15px;
-    margin-left: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
+    @Override
+    public void create() {
+        shapeRenderer = new ShapeRenderer();
+        batch = new SpriteBatch();
+        font = new BitmapFont();
+        font.setColor(Color.WHITE);
+        font.setScale(5); // লেখার সাইজ বড়
 
-button:hover {
-    background-color: #0056b3;
-}
+        characterX = 50;
+        groundLevel = 50;
+        characterY = groundLevel;
+        characterSize = 90;
+        jumpVelocity = 0;
+        gravity = -15;
+        isJumping = false;
 
-/* Site Links */
-.site-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive */
-    gap: 10px;
-    justify-content: center;
-    margin: 10px auto;
-    max-width: 95%;
-    padding: 10px;
-}
+        obstacleWidth = 40;
+        obstacleHeight = 70;
+        obstacleX = Gdx.graphics.getWidth();
 
-/* Individual Site Box */
-.site-card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+        gameOver = false;
+        gameStarted = false;
+        autoMoveSpeed = 150;
 
-.site-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.site-card img {
-    width: 40px; /* Smaller icons */
-    height: 40px;
-    margin-bottom: 5px;
-}
-
-.site-card a {
-    text-decoration: none;
-    color: #007bff;
-    font-size: 1rem;
-    font-weight: bold;
-    display: block;
-}
-
-.site-card a:hover {
-    color: #0056b3;
-}
-
-/* Hidden Class */
-.hidden {
-    display: none;
-}
-
-/* Responsive Design for Mobile */
-@media (max-width: 600px) {
-    .site-container {
-        grid-template-columns: repeat(2, 1fr); /* মোবাইলে ২টি করে দেখাবে */
-        gap: 10px;
+        score = 0;
     }
 
-    h1 {
-        font-size: 1.8rem;
-    }
+    @Override
+    public void render() {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-    #search-input {
-        width: 65%;
-    }
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-    .site-card {
-        padding: 10px;
-    }
-}
-    </style>
-</head>
-<body>
+        if (!gameStarted) {
+            batch.begin();
+            font.draw(batch, "Start", Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() / 2f + 20);
+            batch.end();
 
-<h1>All Sites Viewer</h1>
-
-<div class="search-container">
-    <input type="text" id="search-input" placeholder="Search site..." onkeyup="searchSite()">
-    <button onclick="searchSite()">🔍 Search</button>
-</div>
-
-<div class="site-container">
-    <div class="site-card">
-        <a href="https://www.youtube.com" target="_blank">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=youtube.com" alt="YouTube">
-            <p>YouTube</p>
-        </a>
-    </div>
-
-    <div class="site-card">
-        <a href="https://www.facebook.com" target="_blank">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=facebook.com" alt="Facebook">
-            <p>Facebook</p>
-        </a>
-    </div>
-
-    <div class="site-card">
-        <a href="https://www.tiktok.com" target="_blank">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=tiktok.com" alt="TikTok">
-            <p>TikTok</p>
-        </a>
-    </div>
-
-    <div class="site-card">
-        <a href="https://www.linkedin.com" target="_blank">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=linkedin.com" alt="LinkedIn">
-            <p>LinkedIn</p>
-        </a>
-    </div>
-
-    <div class="site-card">
-        <a href="https://www.github.com" target="_blank">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=github.com" alt="GitHub">
-            <p>GitHub</p>
-        </a>
-    </div>
-
-    <div class="site-card">
-        <a href="https://www.pinterest.com" target="_blank">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=pinterest.com" alt="Pinterest">
-            <p>Pinterest</p>
-        </a>
-    </div>
-
-    <div class="site-card">
-        <a href="https://www.google.com" target="_blank">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=google.com" alt="Google">
-            <p>Google</p>
-        </a>
-    </div>
-
-    <div class="site-card">
-        <a href="https://www.bbc.com" target="_blank">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=bbc.com" alt="BBC">
-            <p>BBC</p>
-        </a>
-    </div>
-
-    <div class="site-card">
-        <a href="https://www.amazon.com" target="_blank">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=amazon.com" alt="Amazon">
-            <p>Amazon</p>
-        </a>
-    </div>
-
-    <div class="site-card">
-        <a href="https://fifa.com" target="_blank">
-            <img src="https://www.google.com/s2/favicons?sz=64&domain=fifa.com" alt="FIFA">
-            <p>FIFA</p>
-        </a>
-    </div>
-</div>
-<script>
-function searchSite() {
-    let input = document.getElementById("search-input").value.toLowerCase();
-    let sites = document.querySelectorAll(".site-card");
-
-    sites.forEach(site => {
-        let siteName = site.querySelector("a").innerText.toLowerCase();
-        if (siteName.includes(input)) {
-            site.classList.remove("hidden");
+            if (Gdx.input.justTouched()) {
+                gameStarted = true;
+            }
+        } else if (!gameOver) {
+            updateGame();
         } else {
-            site.classList.add("hidden");
+            drawGameOver();
         }
-    });
+
+        shapeRenderer.end();
+    }
+
+    private void updateGame() {
+        handleInput();
+        updateCharacter();
+        updateObstacle();
+        checkCollision();
+
+        // গাড়ি আঁকা
+        drawCar();
+
+        // বাধা আঁকা
+        shapeRenderer.setColor(Color.GREEN);
+        shapeRenderer.rect(obstacleX, groundLevel, obstacleWidth, obstacleHeight);
+
+        // স্কোর দেখানো
+        batch.begin();
+        font.draw(batch, "Score: " + score, 50, Gdx.graphics.getHeight() - 50);
+        batch.end();
+    }
+
+    private void drawCar() {
+        // গাড়ির বডি
+        shapeRenderer.setColor(Color.BLUE);
+        shapeRenderer.rect(characterX, characterY, characterSize, characterSize / 2);
+
+        // জানালা
+        shapeRenderer.setColor(Color.CYAN);
+        shapeRenderer.rect(characterX + 10, characterY + characterSize / 4, characterSize / 2, characterSize / 4);
+
+        // হেডলাইট
+        shapeRenderer.setColor(Color.YELLOW);
+        shapeRenderer.circle(characterX + characterSize, characterY + characterSize / 4, 10);
+
+        // চাকা
+        shapeRenderer.setColor(Color.BLACK);
+        shapeRenderer.circle(characterX + 10, characterY - 10, 15);
+        shapeRenderer.circle(characterX + characterSize - 10, characterY - 10, 15);
+    }
+
+    private void drawGameOver() {
+        drawCar();
+
+        shapeRenderer.setColor(Color.GREEN);
+        shapeRenderer.rect(obstacleX, groundLevel, obstacleWidth, obstacleHeight);
+
+        batch.begin();
+        font.draw(batch, "Game Over!", Gdx.graphics.getWidth() / 2f - 200, Gdx.graphics.getHeight() / 2f + 100);
+        font.draw(batch, "Score: " + score, Gdx.graphics.getWidth() / 2f - 150, Gdx.graphics.getHeight() / 2f + 20);
+        font.draw(batch, "Start", Gdx.graphics.getWidth() / 2f - 100, Gdx.graphics.getHeight() / 2f - 50);
+        batch.end();
+
+        if (Gdx.input.justTouched()) {
+            resetGame();
+        }
+    }
+
+    private void handleInput() {
+        if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE) ||
+			Gdx.input.isKeyJustPressed(Input.Keys.UP) ||
+			Gdx.input.justTouched()) && !isJumping) {
+            jumpVelocity = 700;
+            isJumping = true;
+        }
+    }
+
+    private void updateCharacter() {
+        if (isJumping) {
+            characterY += jumpVelocity * Gdx.graphics.getDeltaTime();
+            jumpVelocity += gravity;
+
+            if (characterY <= groundLevel) {
+                characterY = groundLevel;
+                isJumping = false;
+                jumpVelocity = 0;
+            }
+        }
+    }
+
+    private void updateObstacle() {
+        obstacleX -= autoMoveSpeed * Gdx.graphics.getDeltaTime();
+
+        if (obstacleX + obstacleWidth < 0) {
+            obstacleX = Gdx.graphics.getWidth();
+            score += 1;
+            autoMoveSpeed += 10;
+        }
+    }
+
+    private void checkCollision() {
+        if (characterX + characterSize > obstacleX &&
+			characterX < obstacleX + obstacleWidth &&
+			characterY < groundLevel + obstacleHeight) {
+            gameOver = true;
+        }
+    }
+
+    private void resetGame() {
+        characterX = 50;
+        characterY = groundLevel;
+        jumpVelocity = 0;
+        isJumping = false;
+        obstacleX = Gdx.graphics.getWidth();
+        gameOver = false;
+        gameStarted = true;
+        score = 0;
+        autoMoveSpeed = 150;
+    }
+
+    @Override
+    public void dispose() {
+        shapeRenderer.dispose();
+        batch.dispose();
+        font.dispose();
+    }
 }
-</script>
-</body>
-</html>
